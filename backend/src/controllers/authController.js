@@ -106,7 +106,7 @@ export const forgotPassword = async (req, res) => {
     await student.save();
     
     // Create reset url
-    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+    const resetUrl = `https://ofprs-4jtu.vercel.app/reset-password/${resetToken}`;
     
     // Send email with reset link
     await sendPasswordResetEmail(student.email, student.name, resetUrl);
@@ -223,4 +223,5 @@ export const adminRegister = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+
 };

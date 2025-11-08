@@ -28,6 +28,10 @@ export const sendRegistrationEmail = async (studentEmail, studentName) => {
       return true;
     }
     
+    const frontendUrl = process.env.FRONTEND_URL || 'https://ofprs-4jtu.vercel.app';
+    
+    console.log('Sending registration email to:', studentEmail);
+    
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: studentEmail,
@@ -57,7 +61,7 @@ export const sendRegistrationEmail = async (studentEmail, studentName) => {
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://ofprs-4jtu.vercel.app/login" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Verify Account & Login</a>
+              <a href="${frontendUrl}/login" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Verify Account & Login</a>
             </div>
             
             <p>If you have any questions, feel free to contact our support team.</p>
@@ -73,10 +77,10 @@ export const sendRegistrationEmail = async (studentEmail, studentName) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Registration email sent: %s', info.messageId);
+    console.log('Registration email sent successfully to:', studentEmail, 'Message ID:', info.messageId);
     return true;
   } catch (error) {
-    console.error('Error sending registration email:', error);
+    console.error('Error sending registration email to:', studentEmail, error);
     return false;
   }
 };
@@ -90,6 +94,8 @@ export const sendPasswordResetEmail = async (studentEmail, studentName, resetUrl
       console.log('Email not configured. Skipping password reset email.');
       return true;
     }
+    
+    console.log('Sending password reset email to:', studentEmail);
     
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -133,10 +139,10 @@ export const sendPasswordResetEmail = async (studentEmail, studentName, resetUrl
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Password reset email sent: %s', info.messageId);
+    console.log('Password reset email sent successfully to:', studentEmail, 'Message ID:', info.messageId);
     return true;
   } catch (error) {
-    console.error('Error sending password reset email:', error);
+    console.error('Error sending password reset email to:', studentEmail, error);
     return false;
   }
 };
@@ -150,6 +156,8 @@ export const sendPaymentReminderEmail = async (studentEmail, studentName, feeTyp
       console.log('Email not configured. Skipping payment reminder email.');
       return true;
     }
+    
+    const frontendUrl = process.env.FRONTEND_URL || 'https://ofprs-4jtu.vercel.app';
     
     // Format the due date properly
     const formattedDueDate = new Date(dueDate).toLocaleDateString('en-US', {
@@ -187,7 +195,7 @@ export const sendPaymentReminderEmail = async (studentEmail, studentName, feeTyp
             <p>Please log in to your account to make the payment at your earliest convenience.</p>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="http://localhost:3000/login" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Login to Pay Now</a>
+              <a href="${frontendUrl}/login" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Login to Pay Now</a>
             </div>
             
             <p>If you have already made the payment, please disregard this reminder.</p>
@@ -220,6 +228,8 @@ export const sendPaymentSuccessEmail = async (studentEmail, studentName, transac
       console.log('Email not configured. Skipping payment success email.');
       return true;
     }
+    
+    const frontendUrl = process.env.FRONTEND_URL || 'https://ofprs-4jtu.vercel.app';
     
     // Format the payment date
     const paymentDate = new Date(transaction.date).toLocaleDateString('en-US', {
@@ -270,7 +280,7 @@ export const sendPaymentSuccessEmail = async (studentEmail, studentName, transac
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="http://localhost:3000/student/transactions" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">View Transaction History</a>
+              <a href="${frontendUrl}/student/transactions" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">View Transaction History</a>
             </div>
             
             <p>If you have any questions regarding this transaction, please contact our support team.</p>
@@ -293,6 +303,5 @@ export const sendPaymentSuccessEmail = async (studentEmail, studentName, transac
     return false;
   }
 };
-
 
 export default { sendRegistrationEmail, sendPasswordResetEmail, sendPaymentReminderEmail, sendPaymentSuccessEmail };

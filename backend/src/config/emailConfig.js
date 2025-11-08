@@ -57,7 +57,7 @@ export const sendRegistrationEmail = async (studentEmail, studentName) => {
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="http://localhost:3000/login" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Verify Account & Login</a>
+              <a href="https://ofprs-4jtu.vercel.app/login" style="background-color: #1e3c72; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Verify Account & Login</a>
             </div>
             
             <p>If you have any questions, feel free to contact our support team.</p>
@@ -293,5 +293,6 @@ export const sendPaymentSuccessEmail = async (studentEmail, studentName, transac
     return false;
   }
 };
+
 
 export default { sendRegistrationEmail, sendPasswordResetEmail, sendPaymentReminderEmail, sendPaymentSuccessEmail };

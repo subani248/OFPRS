@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+  baseURL: import.meta.env.VITE_API_URL || 'https://ofprs-1.onrender.com/api'
 });
 
 // Add request interceptor to include token
@@ -66,5 +66,6 @@ export const scholarshipAPI = {
   getScholarshipById: (id) => API.get(`/scholarship/admin/${id}`),
   processScholarship: (id, data) => API.put(`/scholarship/admin/${id}`, data)
 };
+
 
 export default API;

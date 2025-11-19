@@ -419,6 +419,7 @@ const LoginPage = () => {
               </button>
 
               <p className="toggle-text">
+<p> plz wait untill you get registered it will take some time be waited</p>
                 Already have an account?{' '}
                 <span className="link" onClick={() => setIsRegister(false)}>
                   Sign in here
